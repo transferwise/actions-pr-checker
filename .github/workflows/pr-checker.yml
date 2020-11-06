@@ -1,0 +1,25 @@
+name: PR checker
+
+on:
+  pull_request:
+    branches: [master, main]
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-for-cc:
+
+    name: Check description
+    runs-on: [self-hosted]
+    steps:
+      - name: Run actions/checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Run check
+        uses: transferwise/actions-pr-checker@v0.0.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          PULL_REQUEST_CONTAINS_PATTERN: '.{20,}'
+#          PULL_REQUEST_NOT_CONTAINS_PATTERN: 'add meaningful description before asking for approval'
+#          PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'

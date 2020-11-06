@@ -25,15 +25,15 @@ fi
 #  exit 1
 #fi
 
-if [[ ! -z "$PULL_REQUEST_PATTERN" && -z "$PULL_REQUEST_COMMENT" ]]; then
-  echo "Set the PULL_REQUEST_COMMENT env variable."
-  exit 1
-fi
-
-if [[ ! -z "$ISSUE_PATTERN" && -z "$ISSUE_COMMENT" ]]; then
-  echo "Set the ISSUE_COMMENT env variable."
-  exit 1
-fi
+#if [[ ! -z "$PULL_REQUEST_PATTERN" && -z "$PULL_REQUEST_COMMENT" ]]; then
+#  echo "Set the PULL_REQUEST_COMMENT env variable."
+#  exit 1
+#fi
+#
+#if [[ ! -z "$ISSUE_PATTERN" && -z "$ISSUE_COMMENT" ]]; then
+#  echo "Set the ISSUE_COMMENT env variable."
+#  exit 1
+#fi
 
 if [[ -z "$PULL_REQUEST_CONTAINS_PATTERN" ]]; then
   PULL_REQUEST_CONTAINS_PATTERN=$PULL_REQUEST_PATTERN
@@ -45,6 +45,11 @@ fi
 
 if [[ -z "$PULL_REQUEST_NOT_CONTAINS_PATTERN" ]]; then
   PULL_REQUEST_NOT_CONTAINS_PATTERN="pseudo-long-string-constant"
+fi
+
+if [[ -z "$PULL_REQUEST_COMMENT" ]]; then
+  PULL_REQUEST_COMMENT="Please check description. \nShould be meaningful and not empty."
+  exit 1
 fi
 
 if [[ -z "$SUCCESS_EMOJI" ]]; then

@@ -5,4 +5,3 @@ runs:
   steps: 
     - run: ${{ github.action_path }}/pr-checker.sh
       shell: bash
-

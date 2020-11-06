@@ -1,0 +1,8 @@
+name: 'PR checker'
+description: 'Check pull request'
+runs:
+  using: "composite"
+  steps: 
+    - run: ${{ github.action_path }}/pr-checker.sh
+      shell: bash
+

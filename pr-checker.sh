@@ -13,8 +13,10 @@ echo $DIR
 
 ls -la
 
-echo "sources"
+echo "sources 1"
 source "${DIR}/defaults.sh"
+
+echo "sources 1"
 source "${DIR}/functions.sh"
 
 echo "function main"

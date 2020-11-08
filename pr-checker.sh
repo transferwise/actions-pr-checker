@@ -7,9 +7,12 @@
 
 set -e
 
+echo "sources"
+
 source defaults.sh
 source functions.sh
 
+echo "function main"
 
 main() {
     GITHUB_EVENT_ACTION=$(jq --raw-output .action "$GITHUB_EVENT_PATH")

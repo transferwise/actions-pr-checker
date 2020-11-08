@@ -7,10 +7,15 @@
 
 set -e
 
-echo "sources"
+echo "diname"
+DIR=$(dirname "$0")
+echo $DIR
 
-source defaults.sh
-source functions.sh
+ls -la
+
+echo "sources"
+source "${DIR}/defaults.sh"
+source "${DIR}/functions.sh"
 
 echo "function main"
 

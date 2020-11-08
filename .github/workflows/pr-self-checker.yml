@@ -25,3 +25,4 @@ jobs:
 #          PULL_REQUEST_NOT_CONTAINS_PATTERN: '.*Why is this PR necessary?.*'
           SUCCESS_EMOJI: '+1'
 #          PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
+

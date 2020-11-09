@@ -32,7 +32,7 @@ main() {
         echo "$GITHUB_PULL_REQUEST_EVENT_BODY"
 
         pr_comparison
-        if $?
+        if [[ $? ]]
           then
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction sent"

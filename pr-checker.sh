@@ -10,6 +10,7 @@ set -e
 DIR=$(dirname "$0")
 source "${DIR}/defaults.sh"
 source "${DIR}/functions.sh"
+source "${DIR}/comparison.sh"
 
 
 main() {
@@ -28,7 +29,7 @@ main() {
         echo "GITHUB_PULL_REQUEST_EVENT_BODY:"
         echo "$GITHUB_PULL_REQUEST_EVENT_BODY"
 
-    if [[ "$GITHUB_PULL_REQUEST_EVENT_BODY" =~ $PULL_REQUEST_CONTAINS_PATTERN && ! "$GITHUB_PULL_REQUEST_EVENT_BODY" =~ $PULL_REQUEST_NOT_CONTAINS_PATTERN ]]
+      if pr_comparison
         then
             echo "GITHUB_PULL_REQUEST_EVENT_BODY matches"
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"

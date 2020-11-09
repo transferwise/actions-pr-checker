@@ -7,19 +7,10 @@
 
 set -e
 
-echo "diname"
 DIR=$(dirname "$0")
-echo $DIR
-
-ls -la
-
-echo "sources 1"
 source "${DIR}/defaults.sh"
-
-echo "sources 1"
 source "${DIR}/functions.sh"
 
-echo "function main"
 
 main() {
     GITHUB_EVENT_ACTION=$(jq --raw-output .action "$GITHUB_EVENT_PATH")

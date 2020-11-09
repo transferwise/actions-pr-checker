@@ -22,14 +22,13 @@ main() {
 
     # handle pull_request
     if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then  # && "$GITHUB_EVENT_ACTION" == "opened"
+        export GITHUB_PULL_REQUEST_EVENT_BODY=$(jq --raw-output .pull_request.body "$GITHUB_EVENT_PATH")
         GITHUB_PULL_REQUEST_EVENT_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        GITHUB_PULL_REQUEST_EVENT_BODY=$(jq --raw-output .pull_request.body "$GITHUB_EVENT_PATH")
 
         echo "GITHUB_PULL_REQUEST_EVENT_NUMBER: ${GITHUB_PULL_REQUEST_EVENT_NUMBER}"
 
       if pr_comparison
         then
-
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction sent"
         else
@@ -45,6 +44,10 @@ main() {
               exit 1
             fi
         fi
+
+    else
+      echo "Unknown GitHub event!"
+      echo "Exited without error"
     fi
 
     exit 0

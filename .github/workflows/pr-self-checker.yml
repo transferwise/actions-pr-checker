@@ -16,9 +16,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Tests
-        run: ./tests/test.sh
-
       - name: Run check
         run: ./pr-checker.sh
         env:
@@ -29,3 +26,5 @@ jobs:
           SUCCESS_EMOJI: '+1'
 #          PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
 
+      - name: Unit tests
+        run: ./tests/test.sh

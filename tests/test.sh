@@ -49,4 +49,4 @@ echo $((i+=1))
 GITHUB_PULL_REQUEST_EVENT_BODY="Hello, fixing [TICKET] and [OTHER]"
 PULL_REQUEST_NOT_CONTAINS_PATTERN=".*Why is this PR necessary?.*"
 pr_comparison
-assert_eq 0 $? "Body not matches NOT pattern - match"
+assert_eq 0 $? "Body not matches NOT pattern - OK"

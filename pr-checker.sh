@@ -26,12 +26,15 @@ main() {
         GITHUB_PULL_REQUEST_EVENT_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
         echo "GITHUB_PULL_REQUEST_EVENT_NUMBER: ${GITHUB_PULL_REQUEST_EVENT_NUMBER}"
+        echo "GITHUB_PULL_REQUEST_EVENT_BODY:"
+        echo "$GITHUB_PULL_REQUEST_EVENT_BODY"
 
-      if pr_comparison
-        then
+        pr_comparison
+        if $?
+          then
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction sent"
-        else
+          else
             sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PULL_REQUEST_COMMENT"
             echo "sent comment"
 

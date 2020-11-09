@@ -16,6 +16,9 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Tests
+        run: ./tests/test.sh
+
       - name: Run check
         run: ./pr-checker.sh
         env:

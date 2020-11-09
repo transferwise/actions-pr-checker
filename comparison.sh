@@ -1,11 +1,18 @@
 #!/bin/bash
 
 pr_comparison() {
+  echo "GITHUB_PULL_REQUEST_EVENT_BODY:"
+  echo "$GITHUB_PULL_REQUEST_EVENT_BODY"
+
   BODY_IS_OK=true
   if [[ "$GITHUB_PULL_REQUEST_EVENT_BODY" =~ $PULL_REQUEST_CONTAINS_PATTERN && ! "$GITHUB_PULL_REQUEST_EVENT_BODY" =~ $PULL_REQUEST_NOT_CONTAINS_PATTERN ]]
   then
+    echo "GITHUB_PULL_REQUEST_EVENT_BODY matches"
+
     return
   else
+    echo "GITHUB_PULL_REQUEST_EVENT_BODY not matches"
+
     false
   fi
 }

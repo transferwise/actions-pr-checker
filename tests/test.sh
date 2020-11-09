@@ -11,7 +11,6 @@ source "${DIR}/../defaults.sh"
 source "${DIR}/../comparison.sh"
 source "${DIR}/assert.sh"
 
-N=0
 
 echo $((i+=1))
 GITHUB_PULL_REQUEST_EVENT_BODY="Something"

@@ -18,6 +18,30 @@ sendReaction() {
 }
 
 
+# Remove emoji from PR description
+# @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
+# @param - EMOJI
+removeReaction() {
+    local GITHUB_ISSUE_NUMBER="$1"
+    local EMOJI="$2"
+
+    LIST=$(curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
+         -X GET \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/reactions" \
+        )
+    COMMENT_ID=$(echo "${LIST}" | jq ".[] | select (.content | contains(\"${EMOJI}\")) | .id")
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
+         -X DELETE \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/reactions/${COMMENT_ID}"
+}
+
+
 # Send comment to PR
 # @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
 # @param - comment text

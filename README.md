@@ -1,4 +1,7 @@
 # actions-pr-checker
+Github Action to check PR description is valid.
+
+Validation strings are regular expressions. Don't forget to escape special chars.
 
 ## Usage example:
 ```yml
@@ -17,6 +20,6 @@
 |PULL_REQUEST_CONTAINS_PATTERN | regexp to validate PR body | `.*` | no
 |PULL_REQUEST_NOT_CONTAINS_PATTERN | regexp to validate PR body | `pseudo-long-string-constant` | | 
 |PULL_REQUEST_COMMENT | Comment to add, if validation not passing| `Please check description. \nShould be meaningful and not empty.` | |
-|SUCCESS_EMOJI | Reaction to PR if check success. \nPossible:  | `heart` |  |
+|SUCCESS_EMOJI | Reaction to PR if check success. Possible: `+1` `-1` `laugh` `confused` `heart` `hooray` `rocket` `eyes` (ref: https://developer.github.com/v3/reactions/#reaction-types) | `heart` |  |
 |FAIL_CLOSES_PR | Close PR in case of check fails | false | |
 |FAIL_EXITS | Fail the check if validation not passing | true | |

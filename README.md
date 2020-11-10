@@ -1,6 +1,6 @@
 # actions-pr-checker
 
-##Usage example:
+## Usage example:
 ```yml
       - name: Run check
         uses: transferwise/actions-pr-checker@v1.0.0
@@ -10,7 +10,7 @@
           PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
 ```
 
-##Parameters
+## Parameters
 | Name | Description | Default | Required |
 |------|-------------|---------|:--------:|
 |GITHUB_TOKEN | github bot token | | yes |

@@ -35,11 +35,13 @@ main() {
         if [[ $? ]]
           then
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
-            removeReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction sent"
           else
             sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PULL_REQUEST_COMMENT"
             echo "sent comment"
+
+            removeReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
+            echo "reaction removed"
 
             if [[ "$FAIL_CLOSES_PR" == true ]]; then
               closeIssue "$GITHUB_PULL_REQUEST_EVENT_NUMBER"

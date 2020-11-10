@@ -32,6 +32,7 @@ removeReaction() {
          -H "Content-Type: application/json" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/reactions" \
         )
+    echo "${LIST}"
     COMMENT_ID=$(echo "${LIST}" > jq ".[] | select (.content | contains(\"${EMOJI}\")) | .id")
     echo "Comment id: ${COMMENT_ID}"
     curl -sSL \

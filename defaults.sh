@@ -49,7 +49,6 @@ fi
 
 if [[ -z "$PULL_REQUEST_COMMENT" ]]; then
   PULL_REQUEST_COMMENT="Please check description. \nShould be meaningful and not empty."
-  exit 1
 fi
 
 if [[ -z "$SUCCESS_EMOJI" ]]; then

@@ -1,4 +1,4 @@
-name: PR checker
+name: PR self checker
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
     types: [opened, edited, synchronize]
 
 jobs:
-  check-for-cc:
+  self-check:
 
     name: Check description
     runs-on: [ubuntu-latest]
@@ -17,9 +17,12 @@ jobs:
           fetch-depth: 1
 
       - name: Run check
-        uses: transferwise/actions-pr-checker@v0.0.3
+        run: ./pr-checker.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_CONTAINS_PATTERN: '.{20,}'
           PULL_REQUEST_NOT_CONTAINS_PATTERN: '.*Why is this PR necessary?.*'
-          SUCCESS_EMOJI: '+1'
-          PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
+#          PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
+
+      - name: Unit tests
+        run: ./tests/test.sh

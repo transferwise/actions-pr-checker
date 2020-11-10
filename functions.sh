@@ -30,10 +30,16 @@ removeReaction() {
          -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
          -X GET \
          -H "Content-Type: application/json" \
-         -d "{\"content\":\"${EMOJI}\"}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/reactions" \
         )
-    echo "$LIST"
+    COMMENT_ID=$(echo "${LIST}" > jq ".[] | select (.content | contains(\"${EMOJI}\")) | .id")
+    echo "Comment id: ${COMMENT_ID}"
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
+         -X DELETE \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/reactions/${COMMENT_ID}"
 }
 
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# From https://github.com/torokmark/assert.sh
+
 #####################################################################
 ##
 ## title: Assert Extension

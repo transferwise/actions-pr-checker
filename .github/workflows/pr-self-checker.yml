@@ -8,7 +8,7 @@ on:
 jobs:
   self-check:
 
-    name: Check description
+    name: Run tests
     runs-on: [ubuntu-latest]
     steps:
       - name: Run actions/checkout

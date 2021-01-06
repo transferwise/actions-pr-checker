@@ -45,6 +45,7 @@ main() {
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction sent"
           else
+
             sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
             echo "sent comment"
             requestChangesComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"

@@ -59,6 +59,23 @@ sendComment() {
 }
 
 
+# Comment reuesting changes to PR
+# @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
+# @param - comment text
+requestChangesComment() {
+    local GITHUB_ISSUE_NUMBER="$1"
+    local GITHUB_ISSUE_COMMENT="$2"
+
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X POST \
+         -H "Content-Type: application/json" \
+         -d "{\"body\":\"${GITHUB_ISSUE_COMMENT}\", \"event\":\"REQUEST_CHANGES\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews"
+}
+
+
 # Close PR
 # @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
 closeIssue() {

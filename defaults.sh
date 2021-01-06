@@ -25,8 +25,8 @@ fi
 #  exit 1
 #fi
 
-#if [[ ! -z "$PULL_REQUEST_PATTERN" && -z "$PULL_REQUEST_COMMENT" ]]; then
-#  echo "Set the PULL_REQUEST_COMMENT env variable."
+#if [[ ! -z "$PULL_REQUEST_PATTERN" && -z "$PR_COMMENT" ]]; then
+#  echo "Set the PR_COMMENT env variable."
 #  exit 1
 #fi
 #
@@ -35,20 +35,28 @@ fi
 #  exit 1
 #fi
 
-if [[ -z "$PULL_REQUEST_CONTAINS_PATTERN" ]]; then
-  PULL_REQUEST_CONTAINS_PATTERN=$PULL_REQUEST_PATTERN
+if [[ -z "$PR_CONTAINS_PATTERN" ]]; then
+  PR_CONTAINS_PATTERN=$PULL_REQUEST_PATTERN
 fi
 
-if [[ -z "$PULL_REQUEST_CONTAINS_PATTERN" ]]; then
-  PULL_REQUEST_CONTAINS_PATTERN=".*"
+if [[ -z "$PR_CONTAINS_PATTERN" ]]; then
+  PR_CONTAINS_PATTERN=".*"
 fi
 
-if [[ -z "$PULL_REQUEST_NOT_CONTAINS_PATTERN" ]]; then
-  PULL_REQUEST_NOT_CONTAINS_PATTERN="pseudo-long-string-constant"
+if [[ -z "$PR_NOT_CONTAINS_PATTERN" ]]; then
+  PR_NOT_CONTAINS_PATTERN="pseudo-long-string-constant"
 fi
 
-if [[ -z "$PULL_REQUEST_COMMENT" ]]; then
-  PULL_REQUEST_COMMENT="Please check description. \nShould be meaningful and not empty."
+if [[ -z "$PR_TITLE_CONTAINS_PATTERN" ]]; then
+  PR_TITLE_CONTAINS_PATTERN=".*"
+fi
+
+if [[ -z "$PR_TITLE_NOT_CONTAINS_PATTERN" ]]; then
+  PR_TITLE_NOT_CONTAINS_PATTERN="pseudo-long-string-constant"
+fi
+
+if [[ -z "$PR_COMMENT" ]]; then
+  PR_COMMENT="Please check description. \nShould be meaningful and not empty."
 fi
 
 if [[ -z "$SUCCESS_EMOJI" ]]; then

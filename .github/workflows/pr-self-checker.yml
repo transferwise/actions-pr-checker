@@ -21,7 +21,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_CONTAINS_PATTERN: '.{20,}'
-          PR_NOT_CONTAINS_PATTERN: '.*Why is this PR necessary?.*'
+          PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
 #          PR_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
 
       - name: Unit tests

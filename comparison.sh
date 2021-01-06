@@ -38,5 +38,5 @@ title_comparison() {
 
 tags_comparison() {
   #TODO
-  true
+  return 0
 }

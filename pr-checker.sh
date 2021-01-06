@@ -38,9 +38,8 @@ main() {
         echo "GITHUB_PULL_REQUEST_EVENT_LABELS:"
         echo "$GITHUB_PULL_REQUEST_EVENT_LABELS"
 
-        #pr_comparison
         body_comparison && title_comparison && tags_comparison
-        if [[ $? ]]
+        if [[ $? -eq 0 ]]
           then
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction sent"

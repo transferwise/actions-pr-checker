@@ -20,6 +20,6 @@ jobs:
         uses: transferwise/actions-pr-checker@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_NOT_CONTAINS_PATTERN: '.*Why is this PR necessary?.*'
+          PULL_REQUEST_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
           SUCCESS_EMOJI: '+1'
           PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'

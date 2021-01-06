@@ -3,13 +3,13 @@ Github Action to check PR description is valid.
 
 Validation strings are regular expressions. Don't forget to escape special chars.
 
-## Usage example:
+## Quick start:
 ```yml
       - name: Run check
-        uses: transferwise/actions-pr-checker@v1.0.0
+        uses: transferwise/actions-pr-checker@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NOT_CONTAINS_PATTERN: '.*Why is this PR necessary?.*'
+          PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
           PR_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
 ```
 
@@ -25,3 +25,10 @@ Validation strings are regular expressions. Don't forget to escape special chars
 |SUCCESS_EMOJI | Reaction to PR if check success. Possible: `+1` `-1` `laugh` `confused` `heart` `hooray` `rocket` `eyes` (ref: https://developer.github.com/v3/reactions/#reaction-types) | `heart` |  |
 |FAIL_CLOSES_PR | Close PR in case of check fails | false | |
 |FAIL_EXITS | Fail the check if validation not passing | true | |
+
+
+## More examples
+PR title complies with convention
+```yml
+
+```

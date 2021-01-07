@@ -59,7 +59,7 @@ sendComment() {
 }
 
 
-# Comment reuesting changes to PR
+# Comment requesting changes to PR
 # @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
 # @param - comment text
 requestChangesComment() {
@@ -72,6 +72,45 @@ requestChangesComment() {
          -X POST \
          -H "Content-Type: application/json" \
          -d "{\"body\":\"${GITHUB_ISSUE_COMMENT}\", \"event\":\"REQUEST_CHANGES\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews"
+}
+
+
+# Remove comment with requested changes
+# @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
+# @param - comment text
+removeRequestChanges() {
+    local GITHUB_ISSUE_NUMBER="$1"
+    local GITHUB_ISSUE_COMMENT="$2"
+
+    LIST=$(curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X GET \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews" \
+        )
+    REVIEW_ID=$(echo "${LIST}" | jq ".[] | select (.body | contains(\"${GITHUB_ISSUE_COMMENT}\")) | .id")
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "application/vnd.github.v3+json" \
+         -X DELETE \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews/${REVIEW_ID}"
+}
+
+
+# Approve PR
+# @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
+approvePr() {
+    local GITHUB_ISSUE_NUMBER="$1"
+
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X POST \
+         -H "Content-Type: application/json" \
+         -d "{\"event\":\"APPROVE\"}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews"
 }
 

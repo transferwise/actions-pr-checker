@@ -3,7 +3,7 @@ name: PR checker
 on:
   pull_request:
     branches: [master, main]
-    types: [opened, edited, synchronize]
+    types: [opened, edited, labeled, unlabeled, synchronize]
 
 jobs:
   check-for-cc:

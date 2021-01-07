@@ -5,13 +5,13 @@ shopt -s nocasematch
 body_comparison() {
   if [[ ! "$GITHUB_PULL_REQUEST_EVENT_BODY" =~ $PR_CONTAINS_PATTERN ]]
   then
-    echo "PR body does not match pattern \"${PR_CONTAINS_PATTERN}\""
+    echo "PR description does not match pattern \"${PR_CONTAINS_PATTERN}\""
     return 1
   fi
 
   if [[ "$GITHUB_PULL_REQUEST_EVENT_BODY" =~ $PR_NOT_CONTAINS_PATTERN ]]
   then
-    echo "PR body should not contain pattern \"${PR_NOT_CONTAINS_PATTERN}\""
+    echo "PR description should not contain pattern \"${PR_NOT_CONTAINS_PATTERN}\""
     return 1
   fi
 

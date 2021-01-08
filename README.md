@@ -35,6 +35,6 @@ PR title complies with convention
         uses: transferwise/actions-pr-checker@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_TITLE_CONTAINS_PATTERN=".*(\\w{3})-([0-9]+).+[^.]$"
+          PR_TITLE_CONTAINS_PATTERN: '.*(\\w{3})-([0-9]+).+[^.]$'
           PR_COMMENT: 'Please check PR title. \nShould follow https://namingconvention.org/git/pull-request-naming.html.'
 ```

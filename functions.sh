@@ -74,12 +74,10 @@ requestChangesComment() {
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews" \
         )
     LAST_STATE=$(echo "${LIST}" | jq -r "last( .[] | select (.user.login | contains(\"github-actions[bot]\")) | .state )")
-    echo $LAST_STATE
     if [[ $LAST_STATE == "CHANGES_REQUESTED" ]]; then
       return 0
     fi
 
-    echo "ask for changes"
     curl -sSL \
          -H "Authorization: token ${GITHUB_TOKEN}" \
          -H "Accept: application/vnd.github.v3+json" \
@@ -94,6 +92,18 @@ requestChangesComment() {
 # @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
 approvePr() {
     local GITHUB_ISSUE_NUMBER="$1"
+
+    LIST=$(curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X GET \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews" \
+        )
+    LAST_STATE=$(echo "${LIST}" | jq -r "last( .[] | select (.user.login | contains(\"github-actions[bot]\")) | .state )")
+    if [[ $LAST_STATE == "APPROVED" ]]; then
+      return 0
+    fi
 
     curl -sSL \
          -H "Authorization: token ${GITHUB_TOKEN}" \

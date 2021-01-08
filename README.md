@@ -22,7 +22,8 @@ Validation strings are regular expressions. Don't forget to escape special chars
 |PR_TITLE_CONTAINS_PATTERN | regexp to validate PR title | `.*` | no
 |PR_TITLE_NOT_CONTAINS_PATTERN | regexp to validate PR title | `pseudo-long-string-constant` | | 
 |PR_COMMENT | Comment to add, if validation not passing| `Please check description. \nShould be meaningful and not empty.` | |
-|SUCCESS_EMOJI | Reaction to PR if check success. Possible: `+1` `-1` `laugh` `confused` `heart` `hooray` `rocket` `eyes` (ref: https://developer.github.com/v3/reactions/#reaction-types) | `heart` |  |
+|SUCCESS_EMOJI | Reaction to PR if check success. Possible: `+1` `-1` `laugh` `confused` `heart` `hooray` `rocket` `eyes` (ref: https://developer.github.com/v3/reactions/#reaction-types) | `+1` |  |
+|SUCCESS_APPROVES_PR | Approve PR when check pass | true | |
 |FAIL_CLOSES_PR | Close PR in case of check fails | false | |
 |FAIL_EXITS | Fail the check if validation not passing | true | |
 

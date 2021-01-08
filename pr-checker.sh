@@ -44,11 +44,19 @@ main() {
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction sent"
 
-            approvePr "$GITHUB_PULL_REQUEST_EVENT_NUMBER"
+            if [[ "$SUCCESS_APPROVES_PR" == true ]]; then
+              approvePr "$GITHUB_PULL_REQUEST_EVENT_NUMBER"
+              echo "pr approved"
+            fi
           else
 
-            requestChangesComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
-            echo "requested changes"
+            if [[ "$SUCCESS_APPROVES_PR" == true ]]; then
+              requestChangesComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
+              echo "requested changes"
+            else
+              sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
+              echo "sent comment"
+            fi
 
             removeReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
             echo "reaction removed"

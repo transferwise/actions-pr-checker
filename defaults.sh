@@ -60,7 +60,7 @@ if [[ -z "$PR_COMMENT" ]]; then
 fi
 
 if [[ -z "$SUCCESS_EMOJI" ]]; then
-  SUCCESS_EMOJI=heart
+  SUCCESS_EMOJI="+1"
 fi
 
 if [[ -z "$FAIL_CLOSES_PR" ]]; then
@@ -69,4 +69,8 @@ fi
 
 if [[ -z "$FAIL_EXITS" ]]; then
   FAIL_EXITS=true
+fi
+
+if [[ -z "$SUCCESS_APPROVES_PR" ]]; then
+  SUCCESS_APPROVES_PR=true
 fi

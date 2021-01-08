@@ -75,7 +75,7 @@ requestChangesComment() {
         )
     LAST_STATE=$(echo "${LIST}" | jq -r "last( .[] | select (.user.login | contains(\"github-actions[bot]\")) | .state )")
     echo $LAST_STATE
-    if [[ $LAST_STATE -eq "CHANGES_REQUESTED" ]]; then
+    if [[ $LAST_STATE == "CHANGES_REQUESTED" ]]; then
       return 0
     fi
 

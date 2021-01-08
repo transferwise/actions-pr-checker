@@ -59,6 +59,62 @@ sendComment() {
 }
 
 
+# Comment requesting changes to PR
+# @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
+# @param - comment text
+requestChangesComment() {
+    local GITHUB_ISSUE_NUMBER="$1"
+    local GITHUB_ISSUE_COMMENT="$2"
+
+    LIST=$(curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X GET \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews" \
+        )
+    LAST_STATE=$(echo "${LIST}" | jq -r "last( .[] | select (.user.login | contains(\"github-actions[bot]\")) | .state )")
+    if [[ $LAST_STATE == "CHANGES_REQUESTED" ]]; then
+      return 0
+    fi
+
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X POST \
+         -H "Content-Type: application/json" \
+         -d "{\"body\":\"${GITHUB_ISSUE_COMMENT}\", \"event\":\"REQUEST_CHANGES\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews"
+}
+
+
+# Approve PR
+# @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
+approvePr() {
+    local GITHUB_ISSUE_NUMBER="$1"
+
+    LIST=$(curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X GET \
+         -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews" \
+        )
+    LAST_STATE=$(echo "${LIST}" | jq -r "last( .[] | select (.user.login | contains(\"github-actions[bot]\")) | .state )")
+    if [[ $LAST_STATE == "APPROVED" ]]; then
+      return 0
+    fi
+
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X POST \
+         -H "Content-Type: application/json" \
+         -d "{\"event\":\"APPROVE\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews"
+}
+
+
 # Close PR
 # @param - GITHUB_PULL_REQUEST_EVENT_NUMBER
 closeIssue() {

@@ -3,12 +3,12 @@ name: PR self checker
 on:
   pull_request:
     branches: [master, main]
-    types: [opened, edited, synchronize]
+    types: [opened, edited, labeled, unlabeled, synchronize]
 
 jobs:
   self-check:
 
-    name: Check description
+    name: Run tests
     runs-on: [ubuntu-latest]
     steps:
       - name: Run actions/checkout
@@ -20,9 +20,9 @@ jobs:
         run: ./pr-checker.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_CONTAINS_PATTERN: '.{20,}'
-          PULL_REQUEST_NOT_CONTAINS_PATTERN: '.*Why is this PR necessary?.*'
-#          PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
+          PR_CONTAINS_PATTERN: '.{20,}'
+          PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
+#          PR_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
 
       - name: Unit tests
         run: ./tests/test.sh

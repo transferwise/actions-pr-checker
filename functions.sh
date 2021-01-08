@@ -74,10 +74,12 @@ requestChangesComment() {
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews" \
         )
     LAST_STATE=$(echo "${LIST}" | jq -r "last( .[] | select (.user.login | contains(\"github-actions[bot]\")) | .state )")
+    echo $LAST_STATE
     if [[ $LAST_STATE -eq "CHANGES_REQUESTED" ]]; then
-      return
+      return 0
     fi
 
+    echo "ask for changes"
     curl -sSL \
          -H "Authorization: token ${GITHUB_TOKEN}" \
          -H "Accept: application/vnd.github.v3+json" \

@@ -6,20 +6,16 @@ on:
     types: [opened, edited, labeled, unlabeled, synchronize]
 
 jobs:
-  check-for-cc:
+  pr-checker:
 
     name: Check PR by stable version
     runs-on: [ubuntu-latest]
     steps:
-      - name: Run actions/checkout
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
 
       - name: Run check
-        uses: transferwise/actions-pr-checker@v1.0.0
+        uses: transferwise/actions-pr-checker@v2.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
-          SUCCESS_EMOJI: '+1'
-          PULL_REQUEST_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
+          PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
+          SUCCESS_EMOJI: 'heart'
+          PR_COMMENT: 'Please check description. \nShould be meaningful and not empty.'

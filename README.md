@@ -5,8 +5,22 @@ Validation strings are regular expressions. Don't forget to escape special chars
 
 ## Quick start:
 ```yml
+name: PR checker
+
+on:
+  pull_request:
+    branches: [master, main]
+    types: [opened, edited, labeled, unlabeled, synchronize]
+
+jobs:
+  pr-checker:
+
+    name: Check PR description
+    runs-on: [ubuntu-latest]
+    steps:
+
       - name: Run check
-        uses: transferwise/actions-pr-checker@v2
+        uses: transferwise/actions-pr-checker@v2.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
@@ -29,12 +43,20 @@ Validation strings are regular expressions. Don't forget to escape special chars
 
 
 ## More examples
-PR title complies with convention
-```yml
+### Check PR description
+```yaml
+
+```
+### Check PR title complies with convention
+```yaml
       - name: Check PR title
-        uses: transferwise/actions-pr-checker@v2
+        uses: transferwise/actions-pr-checker@v2.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_TITLE_CONTAINS_PATTERN: '.*(\\w{3})-([0-9]+).+[^.]$'
           PR_COMMENT: 'Please check PR title. \nShould follow https://namingconvention.org/git/pull-request-naming.html.'
+```
+### Check PR labels are set
+```yaml
+
 ```

@@ -38,7 +38,7 @@ main() {
         echo "GITHUB_PULL_REQUEST_EVENT_BODY:"
         echo "$GITHUB_PULL_REQUEST_EVENT_BODY"
 
-        body_comparison && title_comparison && tags_comparison
+        body_comparison && title_comparison && tags_comparison && no_comparison
         echo "catching mysterious bug - 1"
         if [[ $? -eq 0 ]]
           then
@@ -81,5 +81,7 @@ echo "catching mysterious bug - 2"
 
     exit 0
 }
+
+
 
 main

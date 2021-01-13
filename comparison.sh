@@ -87,3 +87,9 @@ tags_comparison() {
 
   return 0
 }
+
+
+no_comparison() {
+  echo "catching mysterious bug - 0"
+  return 0
+}

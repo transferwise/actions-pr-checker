@@ -90,6 +90,6 @@ tags_comparison() {
 
 
 no_comparison() {
-  echo "catching mysterious bug - 0"
+  # Last operation should return success, otherwise Github Actions will fail the whole run
   return 0
 }

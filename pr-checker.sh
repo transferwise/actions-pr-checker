@@ -25,6 +25,7 @@ main() {
         export GITHUB_PULL_REQUEST_EVENT_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH")
         export GITHUB_PULL_REQUEST_EVENT_BODY=$(jq --raw-output .pull_request.body "$GITHUB_EVENT_PATH")
         export GITHUB_PULL_REQUEST_EVENT_LABELS=$(jq --raw-output .pull_request.labels "$GITHUB_EVENT_PATH")
+        export GITHUB_PULL_REQUEST_EVENT_LABELS_2=$(jq --raw-output .pull_request.labels.[].name "$GITHUB_EVENT_PATH")
         GITHUB_PULL_REQUEST_EVENT_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
         echo "GITHUB_PULL_REQUEST_EVENT_NUMBER: ${GITHUB_PULL_REQUEST_EVENT_NUMBER}"
@@ -35,6 +36,8 @@ main() {
         echo "$GITHUB_PULL_REQUEST_EVENT_TITLE"
         echo "GITHUB_PULL_REQUEST_EVENT_LABELS:"
         echo "$GITHUB_PULL_REQUEST_EVENT_LABELS"
+        echo "GITHUB_PULL_REQUEST_EVENT_LABELS_2:"
+        echo "$GITHUB_PULL_REQUEST_EVENT_LABELS_2"
         echo "GITHUB_PULL_REQUEST_EVENT_BODY:"
         echo "$GITHUB_PULL_REQUEST_EVENT_BODY"
 

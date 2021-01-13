@@ -28,6 +28,7 @@ jobs:
 
             Ensure you have added required tags.
           PR_TAGS_MANDATORY: change:standard change:impactful change:emergency
+          SUCCESS_COMMENT:
 
       - name: Unit tests
         run: ./tests/test.sh

@@ -75,6 +75,10 @@ if [[ -z "$SUCCESS_EMOJI" ]]; then
   SUCCESS_EMOJI="+1"
 fi
 
+if [[ -z "$SUCCESS_COMMENT" ]]; then
+  SUCCESS_COMMENT=""
+fi
+
 if [[ -z "$FAIL_CLOSES_PR" ]]; then
   FAIL_CLOSES_PR=false
 fi

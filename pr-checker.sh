@@ -48,10 +48,11 @@ main() {
               approvePr "$GITHUB_PULL_REQUEST_EVENT_NUMBER"
               echo "pr approved"
             fi
-          else
 
-            echo "PR COMMENT:"
-            echo "$PR_COMMENT"
+            if [[ -n "$SUCCESS_COMMENT" ]]; then
+              sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_COMMENT"
+            fi
+          else
 
             if [[ "$SUCCESS_APPROVES_PR" == true ]]; then
               requestChangesComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"

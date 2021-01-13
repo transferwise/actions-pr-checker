@@ -39,6 +39,7 @@ main() {
         echo "$GITHUB_PULL_REQUEST_EVENT_BODY"
 
         body_comparison && title_comparison && tags_comparison
+        echo "catching mysterious bug - 1"
         if [[ $? -eq 0 ]]
           then
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
@@ -49,6 +50,8 @@ main() {
               echo "pr approved"
             fi
           else
+
+echo "catching mysterious bug - 2"
 
             if [[ "$SUCCESS_APPROVES_PR" == true ]]; then
               requestChangesComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"

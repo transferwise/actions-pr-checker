@@ -22,7 +22,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_CONTAINS_PATTERN: '.{20,}'
           PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
-#          PR_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
+          PR_COMMENT: |
+            Please check description.
+            Should be meaningful and not empty.
+
+            Ensure you have added required tags.
+          PR_TAGS_MANDATORY: change:standard change:impactful change:emergency
 
       - name: Unit tests
         run: ./tests/test.sh

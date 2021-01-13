@@ -85,7 +85,7 @@ requestChangesComment() {
          -H "Accept: application/vnd.github.v3+json" \
          -X POST \
          -H "Content-Type: application/json" \
-         -d @tmp.txt
+         -d @tmp.txt \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews"
 }
 

@@ -55,8 +55,10 @@ main() {
 
 
 send_check_success() {
-  sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
-  echo "reaction sent"
+  if [[ -n "$SUCCESS_EMOJI" ]]; then
+    sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
+    echo "reaction sent"
+  fi
 
   if [[ "$SUCCESS_APPROVES_PR" == true ]]; then
     approvePr "$GITHUB_PULL_REQUEST_EVENT_NUMBER"
@@ -79,8 +81,10 @@ send_check_failed() {
     echo "sent comment"
   fi
 
-  removeReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
-  echo "reaction removed"
+  if [[ -n "$SUCCESS_EMOJI" ]]; then
+    removeReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$SUCCESS_EMOJI"
+    echo "reaction removed"
+  fi
 
   if [[ "$FAIL_CLOSES_PR" == true ]]; then
     closeIssue "$GITHUB_PULL_REQUEST_EVENT_NUMBER"

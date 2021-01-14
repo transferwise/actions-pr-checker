@@ -39,7 +39,7 @@ jobs:
 |PR_TAGS_MIN_COUNT | Minimum number of tags | `0` | |
 |PR_TAGS_RESTRICTED | Allow only tags from the list. Separate by spaces. If empty - allow everything | `` | | 
 |PR_COMMENT | Comment to add, if validation not passing| `Please check description. \nShould be meaningful and not empty.` | |
-|SUCCESS_EMOJI | Reaction to PR if check success. Possible: `+1` `-1` `laugh` `confused` `heart` `hooray` `rocket` `eyes` (ref: https://developer.github.com/v3/reactions/#reaction-types) | `+1` |  |
+|SUCCESS_EMOJI | Reaction to PR if check success. Possible: `+1` `-1` `laugh` `confused` `heart` `hooray` `rocket` `eyes` (ref: https://developer.github.com/v3/reactions/#reaction-types). If empty - no reaction | `+1` |  |
 |SUCCESS_COMMENT | Add comment if check success. If empty - no comment | `` |  |
 |SUCCESS_APPROVES_PR | Approve PR when check pass. If set to `false` won't request changes, but add comments instead | true | |
 |FAIL_CLOSES_PR | Close PR in case of check fails | false | |

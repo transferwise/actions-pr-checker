@@ -49,12 +49,14 @@ sendComment() {
     local GITHUB_ISSUE_NUMBER="$1"
     local GITHUB_ISSUE_COMMENT="$2"
 
+    jq -n --arg msg "$GITHUB_ISSUE_COMMENT" '{body: $msg }' > tmp.txt
+
     curl -sSL \
          -H "Authorization: token ${GITHUB_TOKEN}" \
          -H "Accept: application/vnd.github.v3+json" \
          -X POST \
          -H "Content-Type: application/json" \
-         -d "{\"body\":\"${GITHUB_ISSUE_COMMENT}\"}" \
+         -d @tmp.txt \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/comments"
 }
 
@@ -78,12 +80,14 @@ requestChangesComment() {
       return 0
     fi
 
+    jq -n --arg msg "$GITHUB_ISSUE_COMMENT" '{body: $msg , event: "REQUEST_CHANGES"}' > tmp.txt
+
     curl -sSL \
          -H "Authorization: token ${GITHUB_TOKEN}" \
          -H "Accept: application/vnd.github.v3+json" \
          -X POST \
          -H "Content-Type: application/json" \
-         -d "{\"body\":\"${GITHUB_ISSUE_COMMENT}\", \"event\":\"REQUEST_CHANGES\"}" \
+         -d @tmp.txt \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_ISSUE_NUMBER}/reviews"
 }
 

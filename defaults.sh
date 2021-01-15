@@ -55,12 +55,28 @@ if [[ -z "$PR_TITLE_NOT_CONTAINS_PATTERN" ]]; then
   PR_TITLE_NOT_CONTAINS_PATTERN="pseudo-long-string-constant"
 fi
 
+if [[ -z "$PR_TAGS_MANDATORY" ]]; then
+  PR_TAGS_MANDATORY=""
+fi
+
+if [[ -z "$PR_TAGS_MIN_COUNT" ]]; then
+  PR_TAGS_MIN_COUNT=0
+fi
+
+if [[ -z "$PR_TAGS_RESTRICTED" ]]; then
+  PR_TAGS_RESTRICTED=""
+fi
+
 if [[ -z "$PR_COMMENT" ]]; then
   PR_COMMENT="Please check description. \nShould be meaningful and not empty."
 fi
 
 if [[ -z "$SUCCESS_EMOJI" ]]; then
   SUCCESS_EMOJI="+1"
+fi
+
+if [[ -z "$SUCCESS_COMMENT" ]]; then
+  SUCCESS_COMMENT=""
 fi
 
 if [[ -z "$FAIL_CLOSES_PR" ]]; then

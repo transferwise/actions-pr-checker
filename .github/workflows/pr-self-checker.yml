@@ -27,7 +27,7 @@ jobs:
             Should be meaningful and not empty.
 
             Ensure you have added required tags.
-          PR_TAGS_MANDATORY: ["change:standard", "change:impactful", "change:emergency", bug]
+          PR_TAGS_MANDATORY: '["change:standard", "change:impactful", "change:emergency", bug]'
           SUCCESS_COMMENT: Now this is good PR!
 
       - name: Unit tests

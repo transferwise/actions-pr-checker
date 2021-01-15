@@ -72,6 +72,6 @@ jobs:
         uses: transferwise/actions-pr-checker@v3.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_TAGS_MANDATORY: change:standard change:impactful change:emergency
+          PR_TAGS_MANDATORY: '["change:standard", "change:impactful", "change:emergency", "bug"]'
           PR_COMMENT: "Make sure you added required tags"
 ```

@@ -42,13 +42,15 @@ tags_comparison() {
   set -f
   IFSSS=$IFS
   IFS=$'\n'
-  TAG_LIST=( $(echo $GITHUB_PULL_REQUEST_EVENT_LABELS | jq -r '.[].name') )
+  TAGS_LIST=( $(echo "$GITHUB_PULL_REQUEST_EVENT_LABELS" | jq -r '.[].name') )
+  TAGS_MANDATORY=( $(echo "$PR_TAGS_MANDATORY" | jq -r '.[]') )
+  TAGS_RESTRICTED=( $(echo "$PR_TAGS_RESTRICTED" | jq -r '.[]') )
   # Restore globbing
   test -n "$globbing_disabled" && set +f
   IFS=$IFSSS
 
   # check tags count
-  TAG_COUNT="${#TAG_LIST[@]}"
+  TAG_COUNT="${#TAGS_LIST[@]}"
   if [[ $TAG_COUNT -lt $PR_TAGS_MIN_COUNT ]]; then
     echo "PR tags count is ${TAG_COUNT}, minimum is ${PR_TAGS_MIN_COUNT}"
     return 1
@@ -56,8 +58,8 @@ tags_comparison() {
 
   # check mandatory tags
   HAVE_MANDATORY_TAG=0
-  for TAG in "${TAG_LIST[@]}" ; do
-    for S in $PR_TAGS_MANDATORY ; do
+  for TAG in "${TAGS_LIST[@]}" ; do
+    for S in "${TAGS_MANDATORY[@]}" ; do
       if [[ $S == "$TAG" ]]; then
         HAVE_MANDATORY_TAG=1
       fi
@@ -69,9 +71,9 @@ tags_comparison() {
   fi
 
   # check restricted tags
-  for TAG in "${TAG_LIST[@]}" ; do
+  for TAG in "${TAGS_LIST[@]}" ; do
     HAVE_FORBIDDEN_TAG=1
-    for S in $PR_TAGS_RESTRICTED ; do
+    for S in "${TAGS_RESTRICTED[@]}" ; do
       if [[ $S == "$TAG" ]]; then
         HAVE_FORBIDDEN_TAG=0
       fi

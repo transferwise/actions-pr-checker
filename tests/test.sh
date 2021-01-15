@@ -219,7 +219,7 @@ assert_eq 1 $? "$ERR"
 echo $((i+=1))
 echo "Required tag 'bug' but other 2 assigned - FAIL"
 PR_TAGS_MIN_COUNT=1
-PR_TAGS_MANDATORY="bug"
+PR_TAGS_MANDATORY='["bug"]'
 tags_comparison
 assert_eq 1 $? "$ERR"
 
@@ -233,7 +233,7 @@ GITHUB_PULL_REQUEST_EVENT_LABELS='[
     "name": "bug"
   }
 ]'
-PR_TAGS_MANDATORY="bug    feature"
+PR_TAGS_MANDATORY='["bug", "feature"]'
 tags_comparison
 assert_eq 0 $? "$ERR"
 
@@ -247,7 +247,7 @@ GITHUB_PULL_REQUEST_EVENT_LABELS='[
     "name": "bug feature"
   }
 ]'
-PR_TAGS_MANDATORY="bug feature"
+PR_TAGS_MANDATORY='["bug", "feature"]'
 tags_comparison
 assert_eq 1 $? "$ERR"
 
@@ -262,7 +262,7 @@ GITHUB_PULL_REQUEST_EVENT_LABELS='[
   }
 ]'
 PR_TAGS_MANDATORY=""
-PR_TAGS_RESTRICTED="bug    feature"
+PR_TAGS_RESTRICTED='["bug", "feature"]'
 tags_comparison
 assert_eq 1 $? "$ERR"
 
@@ -274,6 +274,6 @@ GITHUB_PULL_REQUEST_EVENT_LABELS='[
   }
 ]'
 PR_TAGS_MANDATORY=""
-PR_TAGS_RESTRICTED="bug    feature"
+PR_TAGS_RESTRICTED='["bug", "feature"]'
 tags_comparison
 assert_eq 0 $? "$ERR"

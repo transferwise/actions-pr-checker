@@ -20,7 +20,7 @@ jobs:
     steps:
 
       - name: Run check
-        uses: transferwise/actions-pr-checker@v3.0.0
+        uses: transferwise/actions-pr-checker@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
@@ -50,7 +50,7 @@ jobs:
 ### Check PR description is longer than 100 chars
 ```yaml
       - name: Run check
-        uses: transferwise/actions-pr-checker@v2.0.0
+        uses: transferwise/actions-pr-checker@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_CONTAINS_PATTERN: '.{100,}'
@@ -58,7 +58,7 @@ jobs:
 ### Check PR title complies with convention
 ```yaml
       - name: Check PR title
-        uses: transferwise/actions-pr-checker@v3.0.0
+        uses: transferwise/actions-pr-checker@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_TITLE_CONTAINS_PATTERN: '.*(\\w{3})-([0-9]+).+[^.]$'
@@ -69,7 +69,7 @@ jobs:
 ### Check PR labels are set
 ```yaml
       - name: Run check
-        uses: transferwise/actions-pr-checker@v3.0.0
+        uses: transferwise/actions-pr-checker@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_TAGS_MANDATORY: '["change:standard", "change:impactful", "change:emergency", "bug"]'

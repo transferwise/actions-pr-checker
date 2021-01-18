@@ -5,7 +5,7 @@ runs:
   steps:
     - run: |
         if [ $(dpkg-query -W -f='${Status}' jq 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-          apt-get install jq;
+          sudo apt-get install jq;
         fi
       shell: bash
     - run: ${{ github.action_path }}/pr-checker.sh

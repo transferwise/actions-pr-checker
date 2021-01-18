@@ -13,7 +13,7 @@ jobs:
     steps:
 
       - name: Run check
-        uses: transferwise/actions-pr-checker@v3.0.0
+        uses: transferwise/actions-pr-checker@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'

@@ -35,9 +35,9 @@ jobs:
 |PR_NOT_CONTAINS_PATTERN | Regexp to validate PR body | `pseudo-long-string-constant` | no |
 |PR_TITLE_CONTAINS_PATTERN | Regexp to validate PR title | `.*` | no
 |PR_TITLE_NOT_CONTAINS_PATTERN | Regexp to validate PR title | `pseudo-long-string-constant` | | 
-|PR_TAGS_MANDATORY | Should have at least 1 tag from the list | `[]` | | 
+|PR_TAGS_MANDATORY | Should have at least 1 tag from the list. Use JSON format in single quotes: '["bug", "feature"]' | `` | | 
 |PR_TAGS_MIN_COUNT | Minimum number of tags | `0` | |
-|PR_TAGS_RESTRICTED | Allow only tags from the list. Separate by spaces. If empty - allow everything | `` | | 
+|PR_TAGS_RESTRICTED | Allow only tags from the list. If empty - allow everything | `` | | 
 |PR_COMMENT | Comment to add, if validation not passing| `Please check description. \nShould be meaningful and not empty.` | |
 |SUCCESS_EMOJI | Reaction to PR if check success. Possible: `+1` `-1` `laugh` `confused` `heart` `hooray` `rocket` `eyes` (ref: https://developer.github.com/v3/reactions/#reaction-types). If empty - no reaction | `+1` |  |
 |SUCCESS_COMMENT | Add comment if check success. If empty - no comment | `` |  |

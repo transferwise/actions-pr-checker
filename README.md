@@ -1,7 +1,10 @@
 # actions-pr-checker
-Github Action to check PR description is valid.
+Github Action to check PR title/description/labels. Feature rich and flexible.
 
 Validation strings are regular expressions. Don't forget to escape special chars.
+Comparison of substrings for title and description is done in bash using built-in `~=` operator. 
+
+Labels are strictly checked to be equal - not as a substring nor a regexp.
 
 ## Quick start:
 ```yml

@@ -9,4 +9,5 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      run: ./.github/release.sh
+      - name: release
+        run: ./.github/release.sh

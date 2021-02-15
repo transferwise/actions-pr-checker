@@ -78,3 +78,32 @@ jobs:
           PR_TAGS_MANDATORY: '["change:standard", "change:impactful", "change:emergency", "bug"]'
           PR_COMMENT: "Make sure you added required tags"
 ```
+### Not approve PR, only comment
+```yaml
+      - name: Check that PR matches recommendations
+        uses: transferwise/actions-pr-checker@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUCCESS_APPROVES_PR: false
+          PR_CONTAINS_PATTERN: '.{500,}'
+          PR_TAGS_MANDATORY: '["bug", "feature", "refactoring"]'
+          PR_COMMENT: |
+            We would appreciate if you add a valid label (`"bug", "feature", "refactoring"`).
+            Also please make sure that your description is well structured and understandable (recommended >500 chars)
+          SUCCESS_COMMENT: Now that's a good PR!
+```
+### Close PR if unappropriate
+```yaml
+      - name: Check if PR unappropriate
+        uses: transferwise/actions-pr-checker@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FAIL_CLOSES_PR: true
+          PR_NOT_CONTAINS_PATTERN: 'Total refactoring'
+          PR_TAGS_MANDATORY: '["bug", "feature"]'
+          PR_TAGS_RESTRICTED: '["refactoring"]'
+          PR_COMMENT: |
+            We found out that you are using "Total refactory" phrasing either "refactoring" tag. 
+            This is currently not acceptable before we do major release.
+            Your PR will be rejected.
+```

@@ -68,7 +68,7 @@ if [[ -z "$PR_TAGS_RESTRICTED" ]]; then
 fi
 
 if [[ -z "$PR_COMMENT" ]]; then
-  PR_COMMENT="Please check description. \nShould be meaningful and not empty."
+  PR_COMMENT="Please check description. Should be meaningful and not empty."
 fi
 
 if [[ -z "$SUCCESS_EMOJI" ]]; then

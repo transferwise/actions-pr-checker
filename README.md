@@ -27,7 +27,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NOT_CONTAINS_PATTERN: 'Why is this PR necessary?'
-          PR_COMMENT: 'Please check description. \nShould be meaningful and not empty.'
+          PR_COMMENT: |
+            Please check description. 
+            Should be meaningful and not empty.
 ```
 
 ## Parameters

@@ -73,12 +73,14 @@ send_check_success() {
 
 
 send_check_failed() {
-  if [[ "$SUCCESS_APPROVES_PR" == true ]]; then
-    requestChangesComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
-    echo "requested changes"
-  else
-    sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
-    echo "sent comment"
+  if [[ -n "$PR_COMMENT" ]]; then
+    if [[ "$SUCCESS_APPROVES_PR" == true ]]; then
+      requestChangesComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
+      echo "requested changes"
+    else
+      sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PR_COMMENT"
+      echo "sent comment"
+    fi
   fi
 
   if [[ -n "$SUCCESS_EMOJI" ]]; then

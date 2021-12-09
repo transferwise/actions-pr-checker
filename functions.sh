@@ -49,6 +49,8 @@ sendComment() {
     local GITHUB_ISSUE_NUMBER="$1"
     local GITHUB_ISSUE_COMMENT="$2"
 
+    removeDuplicateComment $GITHUB_ISSUE_COMMENT
+
     jq -n --arg msg "$GITHUB_ISSUE_COMMENT" '{body: $msg }' > tmp.txt
 
     curl -sSL \
@@ -79,7 +81,9 @@ requestChangesComment() {
     if [[ $LAST_STATE == "CHANGES_REQUESTED" ]]; then
       return 0
     fi
-
+    
+    removeDuplicateComment $GITHUB_ISSUE_COMMENT
+    
     jq -n --arg msg "$GITHUB_ISSUE_COMMENT" '{body: $msg , event: "REQUEST_CHANGES"}' > tmp.txt
 
     curl -sSL \
@@ -131,4 +135,12 @@ closeIssue() {
          -H "Content-Type: application/json" \
          -d "{\"state\":\"closed\"}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}"
+}
+
+
+# remove comments that contain text
+# @param - comment text
+removeDuplicateComment() {
+    local COMMENT="$1"
+    
 }

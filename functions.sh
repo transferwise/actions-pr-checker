@@ -32,13 +32,15 @@ removeReaction() {
          -H "Content-Type: application/json" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/reactions" \
         )
-    COMMENT_ID=$(echo "${LIST}" | jq ".[] | select (.content | contains(\"${EMOJI}\")) | .id")
+    COMMENT_ID=$(echo "${LIST}" | jq -r --arg emoji "$EMOJI" '.[] | objects | select(.content? == $emoji) | .id' | head -n 1)
+    if [ -n "$COMMENT_ID" ]; then
     curl -sSL \
          -H "Authorization: token ${GITHUB_TOKEN}" \
          -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
          -X DELETE \
          -H "Content-Type: application/json" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/reactions/${COMMENT_ID}"
+    fi
 }
 
 
